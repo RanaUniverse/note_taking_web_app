@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+{% extends 'base_static_file.html' %}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', 'style.css') }}">
-    <title>Note Writing Application</title>
-</head>
+{% block title %}
+Index Home Page
+{% endblock %}
 
-<body>
-    <h1>Note Writing Application</h1>
-    <h3>This will help to write note and stores in the server...</h3>
-</body>
+{% block content %}
+<p>
+    This is the home page of the note taking app. You can do different thigns which you will find here
+</p>
 
-</html>
+{% endblock %}

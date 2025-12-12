@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <title>
+
+        {% block title %}
+        My Note Making Application
+        {% endblock %}
+
+    </title>
+</head>
+
+<body>
+
+    <header>
+        <h1>📝 Note Writing Application 📓</h1>
+        <nav class="nav-bar">
+                <a href="{{ url_for('index_page') }}">🏡 Home</a>
+                <a href="{{ url_for('about_page') }}">📖 About Us</a>
+                <a href="{{ url_for('help_page') }}">💬 Need Help?</a>
+        </nav>
+
+    </header>
+
+    <h3>Write Your Information here...</h3>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+
+        <hr>
+
+        {% block table_demo %}
+        <table>
+            <tr>
+                <th>Header 1</th>
+                <th>Header 2</th>
+            </tr>
+            <tr>
+                <td>Row 1, Cell 1</td>
+                <td>Row 1, Cell 2</td>
+            </tr>
+        </table>
+        {% endblock %}
+    </main>
+
+</body>
+
+</html>

@@ -1,5 +1,12 @@
+.nav-bar {
+    background: aquamarine;
+    padding: 15px 20px;
+    display: flex;
+    gap: 25px;
+}
+
 body {
-    background-color: lightsteelblue;
+    background-color: rgb(224, 229, 235);
 }
 
 h1 {
@@ -8,4 +15,22 @@ h1 {
 
 h2 {
     color: pink;
+}
+
+table {
+    border: 1px solid black;
+    /* border-collapse: collapse; */
+    border-collapse: separate;
+    width: 50%;
+}
+
+th {
+    border: 1px solid rgb(250, 16, 16);
+    padding: 8px;
+    text-align: left;
+}
+
+td {
+    border: 1px solid rgb(27, 46, 218);
+    padding: 8px;
 }
