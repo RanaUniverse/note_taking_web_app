@@ -1,0 +1,12 @@
+Here i will write the steps i am following in my webapp.
+
+1. 
+```
+How are you, <u>{{ user_name or "Guest User (Login to view your name)"}}</u>? 😊
+```
+I will use the or to get the value of the variable in the jinja.
+
+2.
+I will use a macro function so that i can use it to generate the navbar for now?
+I will also use the table and it will come from the macro.
+

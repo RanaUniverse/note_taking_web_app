@@ -1,3 +1,6 @@
+{% import 'macros/navbar.html' as nav %}
+{% import 'macros/table.html' as tab %}
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -18,34 +21,22 @@
 
     <header>
         <h1>📝 Note Writing Application 📓</h1>
-        <nav class="nav-bar">
-                <a href="{{ url_for('index_page') }}">🏡 Home</a>
-                <a href="{{ url_for('about_page') }}">📖 About Us</a>
-                <a href="{{ url_for('help_page') }}">💬 Need Help?</a>
-        </nav>
+
+        {{ nav.navbar() }}
 
     </header>
 
     <h3>Write Your Information here...</h3>
 
     <main>
+        <hr>
+
         {% block content %}
         {% endblock %}
 
         <hr>
 
-        {% block table_demo %}
-        <table>
-            <tr>
-                <th>Header 1</th>
-                <th>Header 2</th>
-            </tr>
-            <tr>
-                <td>Row 1, Cell 1</td>
-                <td>Row 1, Cell 2</td>
-            </tr>
-        </table>
-        {% endblock %}
+        {{ tab.demo_table() }}
     </main>
 
 </body>

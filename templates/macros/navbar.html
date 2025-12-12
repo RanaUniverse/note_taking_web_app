@@ -1,0 +1,7 @@
+{% macro navbar() %}
+<nav class="nav-bar">
+    <a href="{{ url_for('index_page') }}">🏡 Home</a>
+    <a href="{{ url_for('about_page') }}">📖 About Us</a>
+    <a href="{{ url_for('help_page') }}">💬 Need Help?</a>
+</nav>
+{% endmacro %}

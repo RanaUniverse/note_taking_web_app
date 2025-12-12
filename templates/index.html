@@ -1,12 +1,16 @@
 {% extends 'base_static_file.html' %}
 
 {% block title %}
-Index Home Page
+🏠 Index Home Page
 {% endblock %}
 
 {% block content %}
+<h1>
+    How are you, <u>{{ user_name or "Guest User (Login to view your name)"}}</u>? 😊
+</h1>
 <p>
-    This is the home page of the note taking app. You can do different thigns which you will find here
+    This is the home page of the note-taking app ✍️🗒️
+    You can do different things here — explore and enjoy! 🚀
 </p>
 
 {% endblock %}
