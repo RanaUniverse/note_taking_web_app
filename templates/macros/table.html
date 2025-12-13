@@ -1,4 +1,4 @@
-{% macro demo_table() %}
+{% macro demo_table_1() %}
 
 <table>
     <tr>
@@ -9,6 +9,36 @@
         <td>Row 1, Cell 1</td>
         <td>Row 1, Cell 2</td>
     </tr>
+    <tr>
+        <td>Row 2, Cell 1</td>
+        <td>Row 2, Cell 2</td>
+    </tr>
+    <tr>
+        <td>Row 3, Cell 1</td>
+        <td>Row 3, Cell 2</td>
+    </tr>
+</table>
+
+{% endmacro %}
+
+
+{% macro demo_table(row_count) %}
+
+<table>
+    <tr>
+        <th>1st Column</th>
+        <th>2nd Column</th>
+    </tr>
+    {% for i in range(1, row_count+1) %}
+    <tr>
+        <td>
+            Row {{i}}, Cell 1
+        </td>
+        <td>
+            Row {{i}}, Cell 2
+        </td>
+    </tr>
+    {% endfor %}
 </table>
 
 {% endmacro %}

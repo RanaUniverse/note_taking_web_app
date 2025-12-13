@@ -1,3 +1,5 @@
+{# This is the base_static_file.html #}
+
 {% import 'macros/navbar.html' as nav %}
 {% import 'macros/table.html' as tab %}
 
@@ -36,7 +38,7 @@
 
         <hr>
 
-        {{ tab.demo_table() }}
+        {{ tab.demo_table(10) }}
     </main>
 
 </body>
