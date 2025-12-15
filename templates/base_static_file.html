@@ -30,6 +30,20 @@
 
     <h3>Write Your Information here...</h3>
 
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="flash-container">
+        {% for message in messages %}
+        <div class="flash-message">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+
+
     <main>
         <hr>
 
@@ -38,7 +52,17 @@
 
         <hr>
 
-        {{ tab.demo_table(10) }}
+
+        Path and Strip is: {{ request.path.strip("/") or "Home Page" }}
+        <br>
+        Path is: {{ request.path }}
+        <br>
+        Endpint is: {{ request.endpoint }}
+        <br>
+
+
+        {# Below is the actual table #}
+        {{ tab.demo_table(request.path.strip("/") or "Home Page") }}
     </main>
 
 </body>

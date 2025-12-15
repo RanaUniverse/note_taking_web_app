@@ -1,0 +1,22 @@
+{#
+This is Profile.html file here i will write some information
+#}
+
+{% extends 'base_static_file.html' %}
+
+{% block title %}
+Your Profile Information
+{% endblock %}
+
+{% block content %}
+
+<h1>Welcome To Your Profile</h1>
+
+<hr>
+<p><strong>Full Name:</strong> {{ current_user.full_name }}</p>
+<p><strong>Username:</strong> {{ current_user.username }}</p>
+<p><strong>Email:</strong> {{ current_user.email }}</p>
+<p><strong>User ID:</strong> {{ current_user.id }}</p>
+<p><strong>Phone Number:</strong> {{ current_user.phone_no }}</p>
+<hr>
+{% endblock %}

@@ -1,3 +1,31 @@
+{# This is templatex/macros/table.html file #}
+
+
+
+{# i am getting this below loop idea from teh https://tedboy.github.io/jinja2/templ11.html #}
+{% macro demo_table(word) %}
+
+<table>
+    <tr>
+        <th>Numbering</th>
+        <th>Alphabets</th>
+    </tr>
+
+    {% for ch in word %}
+    <tr>
+        <td> {{ loop.index }} </td>
+        <td> {{ ch * loop.index }} </td>
+    </tr>
+    {% endfor %}
+
+</table>
+{% endmacro %}
+
+
+
+
+{# Below is the old jinja macros i made previously #}
+
 {% macro demo_table_1() %}
 
 <table>
@@ -22,7 +50,7 @@
 {% endmacro %}
 
 
-{% macro demo_table(row_count) %}
+{% macro demo_table_2(row_count) %}
 
 <table>
     <tr>

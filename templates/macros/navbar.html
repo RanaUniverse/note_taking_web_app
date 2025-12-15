@@ -1,8 +1,10 @@
 {% macro navbar() %}
 <nav class="nav-bar">
-    <a href="{{ url_for('index_page') }}">🏡 Home</a>
-    <a href="{{ url_for('about_page') }}">📖 About Us</a>
-    <a href="{{ url_for('help_page') }}">💬 Need Help?</a>
-    <a href="{{ url_for('login') }}">Login Here?</a>
+    <a href="{{ url_for('index_page') }}">🏠 Home</a>
+    <a href="{{ url_for('about_page') }}">ℹ️ About Us</a>
+    <a href="{{ url_for('help_page') }}">🆘 Help</a>
+    <a href="{{ url_for('login') }}">🔐 Login</a>
+    <a href="{{ url_for('dashboard') }}">📊 Dashboard</a>
+    <a href="{{ url_for('profile') }}">🙎‍♂ Profile</a>
 </nav>
 {% endmacro %}

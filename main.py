@@ -1,6 +1,36 @@
-from flask import Flask, render_template, request
-from flask_login import UserMixin, LoginManager  # type: ignore
+"""
+This is my main.py code which i will run
+"""
+
+from flask import (
+    Flask,
+    render_template,
+    flash,
+    redirect,
+    url_for,
+    request,
+)
+from flask_login import (  # type: ignore
+    UserMixin,
+    LoginManager,
+    login_user,  # type: ignore
+    # current_user,
+    login_required,  # type: ignore
+)
 from login_form_making import LoginForm
+
+
+def print_color(color_code: str | int, *msgs: str):
+    print(f"\033[{color_code}m" + " ".join(map(str, msgs)) + "\033[0m")
+
+
+def print_red(*msgs: str):
+    print_color(31, *msgs)
+
+
+def print_blue(*msgs: str):
+    print_color(34, *msgs)
+
 
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "super-secret-key"
@@ -11,45 +41,51 @@ app.config["SECRET_KEY"] = "super-secret-key"
 DEMO_USERS: dict[str, dict[str, str | int]] = {
     "a": {
         "id": "a",
-        "username": "a",
+        "username": "a_extra",
+        "full_name": "User A",
         "email": "a@a.a",
         "password": "a",
-        "phone_no": 9876543210,
+        "phone_no": 1111122222,
     },
     "b": {
         "id": "b",
-        "username": "b",
+        "username": "b_extra",
+        "full_name": "User B",
         "email": "b@b.b",
         "password": "b",
-        "phone_no": 9876543210,
+        "phone_no": 1111133333,
     },
     "rana": {
         "id": "rana",
         "username": "rana",
+        "full_name": "Rana",
         "email": "rana@example.com",
         "password": "1234",
-        "phone_no": 9876543210,
+        "phone_no": 999999999,
     },
     "admin": {
         "id": "admin",
         "username": "admin",
+        "full_name": "Admin",
         "email": "admin@example.com",
         "password": "admin",
-        "phone_no": 9876543210,
+        "phone_no": 0,
     },
     "user1": {
         "id": "user1",
         "username": "user1",
+        "full_name": "User One",
         "email": "user1@example.com",
         "password": "pass1",
-        "phone_no": 9876543210,
+        "phone_no": 1212121212,
     },
     "user2": {
         "id": "user2",
         "username": "user2",
+        "full_name": "User Two",
         "email": "user2@example.com",
         "password": "pass2",
-        "phone_no": 9876543210,
+        "phone_no": 1313131313,
     },
 }
 
@@ -60,9 +96,25 @@ login_manager.init_app(app)  # type: ignore
 
 
 class DemoUser(UserMixin):
-    def __init__(self, id: str, username: str):
+    def __init__(self, id: str, username: str, email: str):
         self.id = id
         self.username = username
+        self.email = email
+
+    @property
+    def email_id(self):
+        user_data = DEMO_USERS.get(self.id)
+        return user_data.get("email_id") if user_data else None
+
+    @property
+    def full_name(self):
+        user_data = DEMO_USERS.get(self.id)
+        return user_data.get("full_name") if user_data else None
+
+    @property
+    def phone_no(self):
+        user_data = DEMO_USERS.get(self.id)
+        return user_data.get("phone_no") if user_data else None
 
 
 @login_manager.user_loader  # type: ignore
@@ -78,6 +130,7 @@ def load_demo_users(user_id: str):
     return DemoUser(
         id=str(user_data["id"]),
         username=str(user_data["username"]),
+        email=str(user_data["email"]),
     )
 
 
@@ -99,15 +152,62 @@ def help_page():
 @app.route("/login", methods=["GET", "POST"])
 def login():
     form = LoginForm()
-    if request.method == "POST":
 
-        return "You have submitted your information. <br> we will contact you back"
-        ...
+    if form.validate_on_submit():  # type: ignore
 
+        given_username: str = form.username.data or ""
+        given_password = form.password.data or ""
+
+        user_data = DEMO_USERS.get(given_username)
+        print_red(
+            given_username,
+            given_password,
+            user_data,  # type: ignore
+        )
+
+        if not user_data:
+            print_blue("no usernme found")
+            flash("The Username You Entered, is not exists in our database")
+            flash("Please Check The Username Again")
+            return redirect(url_for("login"))
+
+        if user_data["password"] != given_password:
+            print_blue("password not match")
+            flash("The password you entered is not correct for this username")
+            return redirect(url_for("login"))
+
+        user_obj = DemoUser(
+            id=str(user_data["id"]),
+            username=str(user_data["username"]),
+            email=str(user_data["email"]),
+        )
+
+        login_user(user_obj)
+
+        next_page = request.args.get("next")
+        print_red(next_page)
+        return redirect(next_page or url_for("dashboard"))
+
+        # login_user(user_obj)
+        # return redirect(url_for("dashboard"))
+
+    # below is when it will get request
     return render_template(
         "login.html",
         form=form,
     )
+
+
+@app.route("/dashboard")
+@login_required
+def dashboard():
+    return render_template("dashboard.html")
+
+
+@app.route("/profile")
+@login_required
+def profile():
+    return render_template("profile.html")
 
 
 if __name__ == "__main__":

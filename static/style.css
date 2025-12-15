@@ -34,3 +34,20 @@ td {
     border: 1px solid rgb(27, 46, 218);
     padding: 8px;
 }
+
+/* Flash message container */
+.flash-container {
+    width: 90%;
+    margin: 10px 20px;
+}
+
+/* Single flash message */
+.flash-message {
+    background-color: #ffe0e0;
+    color: #900;
+    padding: 12px 16px;
+    border: 1px solid #f5c2c2;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    font-weight: 500;
+}
