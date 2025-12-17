@@ -1,18 +1,37 @@
-{# 
+{#
 This code is dashboard.html
-This is the place where the user will see the page after he login successfully 
+This is the place where the user will see the page after he login successfully
 Here i used the current_user.somethings below
+
+It need 'notes' variable...
 #}
 {% extends 'base_static_file.html' %}
 
 {% block title %}
-Dashboard Of Your Account
+This is the Dashboard
 {% endblock %}
 
 {% block content %}
 <h1>Welcome To The Dashboard Section</h1>
-<p>Welcome, {{ current_user.username }}!</p>
-<p>Your email is: {{ current_user.email }}</p>
-<p>Your Username is: {{ current_user.username}} </p>
-<p>Your Phone Number is: {{ current_user.phone_no or '"Not Found"' }}</p>
+
+<h1>Your Notes:</h1>
+
+
+{% if notes %}
+<ul>
+    {% for note in notes %}
+    <li>
+        <strong> {{ note.title }} </strong>
+        <br>
+        {{ note.content }}
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No Notes Yet ❌</p>
+
+{% endif %}
+
+
+
 {% endblock %}

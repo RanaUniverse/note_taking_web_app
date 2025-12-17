@@ -14,10 +14,11 @@ from flask_login import (  # type: ignore
     UserMixin,
     LoginManager,
     login_user,  # type: ignore
-    # current_user,
+    current_user,
     login_required,  # type: ignore
 )
-from login_form_making import LoginForm
+
+from wft_forms_fillup import LoginForm, NewNoteForm
 
 
 def print_color(color_code: str | int, *msgs: str):
@@ -87,6 +88,34 @@ DEMO_USERS: dict[str, dict[str, str | int]] = {
         "password": "pass2",
         "phone_no": 1313131313,
     },
+}
+
+
+DEMO_NOTES: dict[str, list[dict[str, str]]] = {
+    "rana": [
+        {
+            "title": "First Book",
+            "content": "My First Book was Mathematics which i readed in childhood.",
+        },
+        {
+            "title": "Second Book",
+            "content": "My 2nd Experience was not memoriable",
+        },
+    ],
+    "admin": [
+        {
+            "title": "Private Password",
+            "content": "I am a admin so i will write some important information about my pass and so on here",
+        },
+        {
+            "title": "Money Transfer",
+            "content": "Here will be the informations of how much money i have spend where where",
+        },
+    ],
+    "a": [
+        {"title": "Learning NOte", "content": "This is the demo content i write here."}
+    ],
+    "b": [],
 }
 
 
@@ -185,15 +214,11 @@ def login():
         login_user(user_obj)
 
         next_page = request.args.get("next")
-        print_red(next_page)
         return redirect(next_page or url_for("dashboard"))
-
-        # login_user(user_obj)
-        # return redirect(url_for("dashboard"))
 
     # below is when it will get request
     return render_template(
-        "login.html",
+        "login_form.html",
         form=form,
     )
 
@@ -201,13 +226,45 @@ def login():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    user_id = current_user.id
+    user_notes = DEMO_NOTES.get(user_id, [])
+    return render_template(
+        "dashboard.html",
+        notes=user_notes,
+    )
 
 
 @app.route("/profile")
 @login_required
 def profile():
     return render_template("profile.html")
+
+
+@app.route("/add-note", methods=["GET", "POST"])
+@login_required
+def add_note():
+    form = NewNoteForm()
+
+    if form.validate_on_submit():  # type: ignore
+        user_id = current_user.id
+        print_blue("Old Note VAlues:", DEMO_NOTES)  # type: ignore
+
+        DEMO_NOTES.setdefault(user_id, []).append(
+            {
+                "title": form.title.data or "",
+                "content": form.content.data or "",
+            }
+        )
+
+        print_red("New Note VAlues:", DEMO_NOTES)  # type: ignore
+
+        flash("Note added successfully ✅")
+        return redirect(url_for("dashboard"))
+
+    return render_template(
+        "new_note_form.html",
+        form=form,
+    )
 
 
 if __name__ == "__main__":

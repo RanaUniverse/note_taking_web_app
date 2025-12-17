@@ -1,4 +1,7 @@
-{# This is the login.html page  #}
+{# 
+This is the login.html page 
+I need to pass the value of 'form'
+#}
 
 {% extends 'base_static_file.html' %}
 
@@ -9,7 +12,13 @@ Login Page is this
 
 {% block content %}
 <h2>Enter Your Login Credentials Below</h2>
-<form method="POST" action="{{ url_for('login') }}" >
+
+{#
+<!-- <form method="POST" action="{{ url_for('login') }}"> -->
+#}
+
+<form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
+
 
     {{ form.hidden_tag() }}
 
