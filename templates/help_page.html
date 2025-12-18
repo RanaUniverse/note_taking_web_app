@@ -12,6 +12,14 @@ Request Help | Support Center
 <section class="help-section">
     <div class="container">
         <h1 class="page-title">💡 Need Assistance?</h1>
+
+        {% if current_user.is_authenticated %}
+        <a href="{{ url_for('logout') }}">Log Out 🚪</a>
+        {% else %}
+        <a href="{{ url_for('login') }}">🔐 Login</a>
+        {% endif %}
+
+
         <p class="intro-text">Our support team is here to help you! Whether you're facing an issue or just need some
             guidance, we're just a click away. 🌟</p>
 

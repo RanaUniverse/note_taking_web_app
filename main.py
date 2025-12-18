@@ -14,6 +14,7 @@ from flask_login import (  # type: ignore
     UserMixin,
     LoginManager,
     login_user,  # type: ignore
+    logout_user,
     current_user,
     login_required,  # type: ignore
 )
@@ -180,6 +181,14 @@ def help_page():
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+
+    if current_user.is_authenticated:
+        print_blue("A Login user has open this /login")
+        flash("You are already logged in.")
+        flash("You don't need to login again")
+        flash("You have been redirected to our /dashboard.")
+        return redirect(url_for("dashboard"))
+
     form = LoginForm()
 
     if form.validate_on_submit():  # type: ignore
@@ -210,7 +219,7 @@ def login():
             username=str(user_data["username"]),
             email=str(user_data["email"]),
         )
-
+        print_blue("A user has just login here.")
         login_user(user_obj)
 
         next_page = request.args.get("next")
@@ -265,6 +274,22 @@ def add_note():
         "new_note_form.html",
         form=form,
     )
+
+
+@app.route("/logout")
+@app.route("/logout_me")
+@login_required
+def logout():
+    username = current_user.username
+    logout_user()
+    flash(f"{username}, Recently You have been logout successfully...")
+    return redirect(url_for("index_page"))
+
+
+@app.route("/register")
+def register():
+    flash("Coming Soon...")
+    return render_template("register.html")
 
 
 if __name__ == "__main__":
