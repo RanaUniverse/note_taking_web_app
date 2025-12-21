@@ -12,3 +12,4 @@ How to start in a new machine...
 After this i need to run the below:
 
 `uv run main.py`
+

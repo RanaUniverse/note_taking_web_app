@@ -17,7 +17,7 @@ Login Page is this
 <!-- <form method="POST" action="{{ url_for('login') }}"> -->
 #}
 
-<form method="POST" action="{{ url_for('login', next=request.args.get('next')) }}">
+<form method="POST" action="{{ url_for('auth_bp.login', next=request.args.get('next')) }}">
 
 
     {{ form.hidden_tag() }}

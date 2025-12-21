@@ -13,3 +13,5 @@ I will also use the table and it will come from the macro.
 3. 
 https://tedboy.github.io/jinja2/templ11.html
 This website help to get some idea about the jinja things.
+
+4. I will make blueprint for which i need to make different folders and inside this i need to make routes.py and own things maybe.

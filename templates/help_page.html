@@ -14,9 +14,9 @@ Request Help | Support Center
         <h1 class="page-title">💡 Need Assistance?</h1>
 
         {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">Log Out 🚪</a>
+        <a href="{{ url_for('auth_bp.logout') }}">Log Out 🚪</a>
         {% else %}
-        <a href="{{ url_for('login') }}">🔐 Login</a>
+        <a href="{{ url_for('auth_bp.login') }}">🔐 Login</a>
         {% endif %}
 
 
