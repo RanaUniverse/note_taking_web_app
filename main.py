@@ -13,8 +13,6 @@ from flask import (
 )
 from flask_login import (  # type: ignore
     LoginManager,
-    login_user,  # type: ignore
-    login_required,  # type: ignore
 )
 
 
@@ -25,6 +23,8 @@ from blueprint.profile.routes import profile_bp
 
 from utils.demo_data import DEMO_USERS, DemoUser
 
+
+from db_codes.database_make import create_db_and_engine
 
 app = Flask(__name__)
 
@@ -59,6 +59,7 @@ def load_demo_users(user_id: str):
 
 
 if __name__ == "__main__":
+    create_db_and_engine()
     app.run(
         host="0.0.0.0",
         port=5000,

@@ -1,30 +1,31 @@
 """
 This is for my learning checking codes...
+
+Currently i can run this code and insert some fake data in the database
 """
 
-from functools import partial
+import sys
+
+sys.dont_write_bytecode = True
+# This upper 2 line not make the __pycache__ folder
 
 
-def greet(
-    name: str,
-    language: str,
-):
-    if language == "en":
-        return f"Hello {name}"
-    if language == "bn":
-        return f"নমস্কার {name}"
+from db_codes.models_table import UserData
+from db_codes.db_functions import add_new_user, add_new_note
+from db_codes.database_make import engine
 
+user_obj = UserData(
+    username="rana6",
+    first_name="Rana",
+    last_name="Universe",
+    email_id="Rana@Universe.com",
+    phone_no="000",
+)
 
-abc = greet("Rana", "en")
-abc = greet("Rana", "bn")
-
-def english_greet(name:str):
-    return greet(name, "en")
-
-abc = english_greet("Rana")
-print(abc)
-
-
-greet_english = partial(greet, language="eln")
-xyz = greet_english("John Cena", language="bn")
-print(xyz)
+# add_new_user(engine, user_obj)
+add_new_note(
+    engine=engine,
+    user_row=user_obj,
+    note_title="Thansdfsdks",
+    note_content="I am very glad to sesdfsde you",
+)
