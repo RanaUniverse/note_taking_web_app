@@ -9,13 +9,17 @@ and it will work in my main places.
 
 from sqlalchemy import Engine
 from sqlalchemy.exc import IntegrityError
-from sqlmodel import Session
+from sqlmodel import Session, select
 
 from db_codes.models_table import UserData, NoteData
-from utils.demo_data import print_red
+
+from utils.custom_logger import logger
 
 
-def add_new_user(engine: Engine, user_row: UserData) -> UserData | None:
+def add_new_user(
+    engine: Engine,
+    user_row: UserData,
+) -> UserData | None:
     """
     I will call this function and pass the user_obj
     and it will try to insert the data in the table and
@@ -29,7 +33,11 @@ def add_new_user(engine: Engine, user_row: UserData) -> UserData | None:
             return user_row
 
         except IntegrityError as e:
-            print_red(str(e))
+            logger.warning(e)
+            return None
+
+        except Exception as e:
+            logger.error(e)
             return None
 
 
@@ -55,6 +63,63 @@ def add_new_note(
             session.commit()
             session.refresh(note_obj)
             return note_obj
+
         except IntegrityError as e:
-            print_red(str(e))
+            logger.warning(e)
             return None
+
+        except Exception as e:
+            logger.error(e)
+            return None
+
+
+def get_all_user_list(engine: Engine):
+    with Session(engine) as session:
+        statement = select(UserData)
+        results = session.exec(statement)
+        all_user = results.all()
+        return all_user
+
+
+def get_user_obj_from_user_id(
+    engine: Engine,
+    user_id: str,
+) -> UserData | None:
+    """
+    If the user id is wrong or the user row not found
+    against this user_id it will return none
+    """
+    with Session(engine) as session:
+        sta = select(UserData).where(UserData.user_id == user_id)
+        results = session.exec(sta)
+        one_user = results.first()
+        return one_user
+
+
+def get_all_notes_from_user_id(
+    engine: Engine,
+    user_id: str,
+):
+    with Session(engine) as session:
+        sta = select(UserData).where(UserData.user_id == user_id)
+        results = session.exec(sta)
+        one_user = results.first()
+        if not one_user:
+            return
+        return one_user.notes
+
+
+def get_all_notes_from_user_obj(
+    engine: Engine,
+    user_obj: UserData,
+):
+    """
+    Maybe i will not use this in warning?
+
+    When there is a valid correct user_obj i will pass the obj
+    and it will give me the list of all his notes
+    """
+    with Session(engine) as session:
+        statement = select(NoteData).where(NoteData.user_id == user_obj.user_id)
+        results = session.exec(statement)
+        return results.all()

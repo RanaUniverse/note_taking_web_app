@@ -18,7 +18,7 @@ from flask_login import (  # type: ignore
 
 from wft_forms_fillup import NewNoteForm
 
-from utils.demo_data import DEMO_NOTES, print_blue, print_red
+from utils.demo_data import DEMO_NOTES
 
 note_bp = Blueprint(
     name="note_bp",
@@ -34,7 +34,6 @@ def add_note():
 
     if form.validate_on_submit():  # type: ignore
         user_id = current_user.id
-        print_blue("Old Note VAlues:", DEMO_NOTES)  # type: ignore
 
         DEMO_NOTES.setdefault(user_id, []).append(
             {
@@ -42,8 +41,6 @@ def add_note():
                 "content": form.content.data or "",
             }
         )
-
-        print_red("New Note VAlues:", DEMO_NOTES)  # type: ignore
 
         flash("Note added successfully ✅")
         return redirect(url_for("profile_bp.dashboard"))

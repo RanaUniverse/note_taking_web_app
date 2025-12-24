@@ -21,7 +21,7 @@ from flask_login import (  # type: ignore
 )
 
 
-from utils.demo_data import print_blue, print_red, DemoUser, DEMO_USERS
+from utils.demo_data import DemoUser, DEMO_USERS
 from wft_forms_fillup import LoginForm
 
 auth_bp = Blueprint(
@@ -35,7 +35,6 @@ auth_bp = Blueprint(
 def login():
 
     if current_user.is_authenticated:
-        print_blue("A Login user has open this /login")
         flash("You are already logged in.")
         flash("You don't need to login again")
         flash("You have been redirected to our /dashboard.")
@@ -49,20 +48,13 @@ def login():
         given_password = form.password.data or ""
 
         user_data = DEMO_USERS.get(given_username)
-        print_red(
-            given_username,
-            given_password,
-            user_data,  # type: ignore
-        )
 
         if not user_data:
-            print_blue("no usernme found")
             flash("The Username You Entered, is not exists in our database")
             flash("Please Check The Username Again")
             return redirect(url_for("auth_bp.login"))
 
         if user_data["password"] != given_password:
-            print_blue("password not match")
             flash("The password you entered is not correct for this username")
             return redirect(url_for("auth_bp.login"))
 
@@ -71,7 +63,6 @@ def login():
             username=str(user_data["username"]),
             email=str(user_data["email"]),
         )
-        print_blue("A user has just login here.")
         login_user(user_obj)
 
         next_page = request.args.get("next")
