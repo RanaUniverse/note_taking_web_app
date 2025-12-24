@@ -12,3 +12,7 @@ wheels/
 
 # The databse file for sqlite3
 z_database.db
+
+# This below is the default name i keep in my 
+# config files for the log data to store here
+web_app.log
