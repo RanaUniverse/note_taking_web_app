@@ -20,6 +20,7 @@ from blueprint.auth.routes import auth_bp
 from blueprint.note.routes import note_bp
 from blueprint.general.routes import general_bp
 from blueprint.profile.routes import profile_bp
+from blueprint.admin.routes import admin_bp
 
 from utils.demo_data import DEMO_USERS, DemoUser
 
@@ -34,7 +35,7 @@ app.register_blueprint(blueprint=auth_bp)
 app.register_blueprint(blueprint=general_bp)
 app.register_blueprint(blueprint=note_bp)
 app.register_blueprint(blueprint=profile_bp)
-
+app.register_blueprint(blueprint=admin_bp, url_prefix="/admin")
 
 login_manager = LoginManager()
 login_manager.login_view = "auth_bp.login"  # type: ignore

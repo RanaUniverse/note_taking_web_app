@@ -49,6 +49,7 @@ def add_new_note(
 ) -> NoteData | None:
     """
     Here i assume that the user is already present in the table
+    i need to pass the user_obj and the note details to insert in the db
     """
 
     note_obj = NoteData(

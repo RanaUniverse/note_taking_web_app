@@ -6,6 +6,7 @@ when i will call the navbar.html
 
 {% macro navbar() %}
 <nav class="nav-bar">
+    <a href="{{ url_for('admin_bp.index_page') }}">🛠️ Admin Page</a>
     <a href="{{ url_for('general_bp.index_page') }}">🏠 Home</a>
     <a href="{{ url_for('general_bp.about_page') }}">ℹ️ About Us</a>
     <a href="{{ url_for('general_bp.help_page') }}">🆘 Help</a>
