@@ -15,3 +15,5 @@ https://tedboy.github.io/jinja2/templ11.html
 This website help to get some idea about the jinja things.
 
 4. I will make blueprint for which i need to make different folders and inside this i need to make routes.py and own things maybe.
+
+5. I found when working with sqlite3 > sqlmodel when having the username column as unique = true, the null values so i will do for now unique = false and on adding new user first it will check of username already present or not?

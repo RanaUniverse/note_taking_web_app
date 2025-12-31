@@ -97,6 +97,21 @@ def get_user_obj_from_user_id(
         return one_user
 
 
+def get_user_obj_from_username(
+    engine: Engine,
+    username: str,
+) -> UserData | None:
+    """
+    Here i will pass the username and it should take out
+    the user obj and show me this
+    """
+    with Session(engine) as session:
+        sta = select(UserData).where(UserData.username == username)
+        results = session.exec(sta)
+        one_user = results.first()
+        return one_user
+
+
 def get_all_notes_from_user_id(
     engine: Engine,
     user_id: str,

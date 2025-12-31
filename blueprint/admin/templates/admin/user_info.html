@@ -1,0 +1,34 @@
+{# This is blueprint/admin/templates/admin/users_info.html #}
+
+{% extends 'admin/base_admin_page.html' %}
+
+{% block title %}
+See Total NOtes Number
+{% endblock %}
+
+{% block content %}
+Total Number of users who are in our server will be available here.
+<br>
+
+{# {{ all_users }} #}
+
+{% if user_row %}
+
+<p>
+    <strong> User ID: </strong> {{ user.user_id }}
+    <br>
+    <strong> Name: </strong> {{ user.first_name + " " + user.last_name}}
+    <br>
+    <strong> Email ID: </strong> {{ user.email_id }}
+    <br>
+    <strong> Phone Number: </strong> {{ user.phone_no }}
+</p>
+
+{% else %}
+<p>No users found with given username.</p>
+
+{% endif %}
+
+
+
+{% endblock %}

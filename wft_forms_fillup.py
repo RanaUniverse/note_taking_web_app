@@ -29,6 +29,15 @@ class LoginForm(FlaskForm):
     submit = SubmitField(label="Login Here")
 
 
+class UserFromUsernameForm(FlaskForm):
+    """
+    This i make to use in the username search from the user table by admin for now
+    """
+
+    username = StringField(label="What is the username?", validators=[DataRequired()])
+    submit = SubmitField(label="Search from the username")
+
+
 class NewNoteForm(FlaskForm):
     """
     This will be when i wnat to take the data from user

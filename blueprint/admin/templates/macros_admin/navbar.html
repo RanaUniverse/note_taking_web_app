@@ -5,10 +5,15 @@ i am making this so that i can have some admin related thigns here for easily ac
 
 #}
 
-
-{% macro navbar() %}
-<a href="{{ url_for('general_bp.index_page')}}">🏡Home Page🏡</a>
-<a href="{{ url_for('admin_bp.index_page') }}">🛠️ Admin Page</a>
-<a href="{{ url_for('admin_bp.note_count') }}">🗒️ How Many Note</a>
-
+{% macro admin_navbar() %}
+<a href="{{ url_for('general_bp.index_page') }}">🏠 Home</a>
+<br>
+<a href="{{ url_for('admin_bp.index_page') }}">🛠️ Admin Dashboard</a>
+<br>
+<a href="{{ url_for('admin_bp.all_users_info') }}">👥 All Users</a>
+<br>
+<a href="{{ url_for('admin_bp.note_count') }}">🗒️ Notes Overview</a>
+<br>
+<a href="{{ url_for('admin_bp.username') }}">🔍 User Details</a>
+<br>
 {% endmacro %}

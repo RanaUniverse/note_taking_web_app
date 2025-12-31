@@ -1,0 +1,30 @@
+{#
+This is blueprint/admin/templates/admin/user_from_username.html
+i make this for checking of the username of the user table and found the user information #}
+
+{% extends '/admin/base_admin_page.html' %}
+
+{% block title %}
+User Information from the username value
+{% endblock %}
+
+{% block content %}
+<h2>Enter The Username of the user to find the user details</h2>
+
+
+<form action="{{ url_for('admin_bp.username') }}" method="post">
+
+    {{ form.hidden_tag() }}
+
+    <p>
+        {{ form.username.label }}
+        <br>
+        {{ form.username(size=32) }}
+    </p>
+
+    <p>
+        {{ form.submit() }}
+    </p>
+
+</form>
+{% endblock %}

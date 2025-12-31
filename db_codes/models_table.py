@@ -21,7 +21,7 @@ class UserData(SQLModel, table=True):
     __tablename__: str = "user_data"  # type: ignore
 
     id_: int | None = Field(default=None, primary_key=True)
-    user_id: str = Field(default_factory=generate_uuid, unique=True, index=True)
+    user_id: str = Field(default_factory=generate_uuid, index=True)
     username: str | None = Field(default=None, index=True, unique=True)
     first_name: str | None = Field(default=None)
     last_name: str | None = Field(default=None)
