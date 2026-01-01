@@ -1,0 +1,44 @@
+{#
+blueprint/admin/templates/admin/all_notes_info.html
+#}
+
+{% extends 'admin/base_admin_page.html' %}
+
+{% block title %}
+Know all notes list and details
+{% endblock %}
+
+{% block content %}
+
+<h1>All Notes & Their Details are showing below</h1>
+<hr>
+
+{% for note in all_notes %}
+
+Note ID: {{ note.note_id }}
+<br>
+Note Title: <b>{{ note.note_title }}</b>
+<br>
+Note Content: <b>{{ note.note_content }}</b>
+<br>
+User ID: {{ note.user_id }}
+<br>
+Created Time: {{ note.created_time }}
+<br>
+
+{% if note.edited_time %}
+Edited Time: {{ note.edited_time }}
+<br>
+{% endif %}
+
+Available: {{ "Yes" if note.is_available else "No" }}
+<br>
+<hr>
+
+{% else %}
+
+Here is 0 Notes Total
+
+{% endfor %}
+
+{% endblock %}

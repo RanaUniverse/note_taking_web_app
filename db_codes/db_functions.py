@@ -82,6 +82,14 @@ def get_all_user_list(engine: Engine):
         return all_user
 
 
+def get_all_note_list(engine: Engine):
+    with Session(engine) as session:
+        statement = select(NoteData)
+        results = session.exec(statement)
+        all_notes = results.all()
+        return all_notes
+
+
 def get_user_obj_from_user_id(
     engine: Engine,
     user_id: str,
