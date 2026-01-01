@@ -10,7 +10,12 @@ from flask import (
 )
 
 from db_codes.database_make import engine
-from db_codes.db_functions import get_all_user_list, get_user_obj_from_username, get_all_note_list
+from db_codes.db_functions import (
+    get_all_user_list,
+    get_user_obj_from_username,
+    get_all_note_list,
+    get_all_notes_from_user_id,
+)
 
 from wft_forms_fillup import UserFromUsernameForm
 
@@ -33,6 +38,7 @@ def all_users_info():
         "/admin/all_users_info.html",
         all_users=all_users,
     )
+
 
 @admin_bp.route("/all_notes")
 def all_notes_info():
@@ -65,9 +71,16 @@ def username():
             engine=engine,
             username=given_username,
         )
+
+        user_id = user_row.user_id
+        his_notes = get_all_notes_from_user_id(
+            engine=engine,
+            user_id=user_id,
+        )
         return render_template(
             "/admin/user_info.html",
-            user_row=user_row,
+            user=user_row,
+            notes=his_notes,
         )
 
     return render_template(

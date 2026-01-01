@@ -7,14 +7,14 @@ See Total NOtes Number
 {% endblock %}
 
 {% block content %}
-Total Number of users who are in our server will be available here.
+<h1>The Details Of the searching user will show here...</h1>
 <br>
 
-{# {{ all_users }} #}
-
-{% if user_row %}
+{% if user %}
 
 <p>
+    <strong> UserName: </strong> {{ user.username }}
+    <br>
     <strong> User ID: </strong> {{ user.user_id }}
     <br>
     <strong> Name: </strong> {{ user.first_name + " " + user.last_name}}
@@ -22,7 +22,29 @@ Total Number of users who are in our server will be available here.
     <strong> Email ID: </strong> {{ user.email_id }}
     <br>
     <strong> Phone Number: </strong> {{ user.phone_no }}
-</p>
+    <br>
+
+
+<h2>His Notes</h2>
+
+
+{% if notes %}
+
+{% for note in notes %}
+<hr>
+<strong>{{ loop.index }}. <u>{{note.note_title}} 👇🏼</u></strong>
+<br>
+<strong>Note Content: →</strong> {{note.note_content}}
+<hr>
+{% endfor %}
+
+
+
+{% else %}
+<h3>He Has 0 Notes</h3>
+{% endif %}
+
+
 
 {% else %}
 <p>No users found with given username.</p>
