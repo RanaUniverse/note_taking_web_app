@@ -51,7 +51,6 @@ def all_notes_info():
 
 @admin_bp.route("/note_count")
 def note_count():
-
     return render_template(
         "/admin/notes_count.html",
     )
@@ -71,6 +70,12 @@ def username():
             engine=engine,
             username=given_username,
         )
+        if not user_row:
+            return render_template(
+                "/admin/user_info.html",
+                user=user_row,
+                form=form,
+            )
 
         user_id = user_row.user_id
         his_notes = get_all_notes_from_user_id(
@@ -81,6 +86,7 @@ def username():
             "/admin/user_info.html",
             user=user_row,
             notes=his_notes,
+            form=form,
         )
 
     return render_template(
