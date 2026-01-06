@@ -4,6 +4,12 @@ This file will need to run after run the main.py
 zzz_insert_demo_data.py
 """
 
+import sys
+
+sys.dont_write_bytecode = True
+# This upper 2 line not make the __pycache__ folder
+
+
 from faker import Faker
 
 
@@ -12,12 +18,6 @@ from db_codes.db_functions import add_new_user, add_new_note
 from db_codes.models_table import UserData
 
 fake = Faker()
-
-
-print(
-    "This code is inserting some demo data in the database "
-    "on each run it will insert new user and new note"
-)
 
 
 def insert_one_demo_user():
@@ -60,6 +60,11 @@ if __name__ == "__main__":
     USER_COUNT = 3
     NOTE_COUNT = 5
 
+    print(
+        "Inserting demo data into the database...\n"
+        f"{USER_COUNT} users will be created, each with {NOTE_COUNT} notes."
+    )
+
     for _ in range(USER_COUNT):
         user = insert_one_demo_user()
 
@@ -70,4 +75,6 @@ if __name__ == "__main__":
         for _ in range(NOTE_COUNT):
             insert_one_demo_note(user)
 
-    print(f"{USER_COUNT} users and {USER_COUNT * NOTE_COUNT} notes inserted.")
+    print(
+        f"Successfully inserted {USER_COUNT} users and {USER_COUNT * NOTE_COUNT} notes into the database."
+    )

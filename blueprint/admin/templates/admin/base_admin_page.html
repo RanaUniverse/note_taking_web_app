@@ -54,7 +54,8 @@
 <body>
     {{ nav.admin_navbar() }}
     <hr>
-
+    {{ request.endpoint }}
+    <hr>
     {% with messages = get_flashed_messages(with_categories=true) %}
 
     {% if messages %}
