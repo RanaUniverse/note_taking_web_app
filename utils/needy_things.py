@@ -11,7 +11,6 @@ def generate_uuid() -> str:
     return str(uuid4().hex)
 
 
-DATABASE_FILE_NAME = "z_database.db"
 
 GMT_TIMEZONE = datetime.timezone(datetime.timedelta(hours=0, minutes=0))
 IST_TIMEZONE = datetime.timezone(datetime.timedelta(hours=5, minutes=30))

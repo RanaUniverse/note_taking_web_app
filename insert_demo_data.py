@@ -17,6 +17,8 @@ from db_codes.database_make import engine
 from db_codes.db_functions import add_new_user, add_new_note
 from db_codes.models_table import UserData
 
+from utils.config_files import DEMO_NOTE_COUNT_INT, DEMO_USER_COUNT_INT
+
 fake = Faker()
 
 
@@ -57,8 +59,8 @@ def insert_one_demo_note(user_obj: UserData):
 
 
 if __name__ == "__main__":
-    USER_COUNT = 3
-    NOTE_COUNT = 5
+    USER_COUNT = DEMO_USER_COUNT_INT
+    NOTE_COUNT = DEMO_NOTE_COUNT_INT
 
     print(
         "Inserting demo data into the database...\n"

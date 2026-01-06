@@ -21,8 +21,7 @@ from db_codes.models_table import (
     NoteData,  # type: ignore
 )
 
-
-from utils.needy_things import DATABASE_FILE_NAME
+from utils.env import DATABASE_FILE_NAME
 
 
 sqlite_file_name = Path.cwd() / DATABASE_FILE_NAME

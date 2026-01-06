@@ -23,13 +23,13 @@ from blueprint.profile.routes import profile_bp
 from blueprint.admin.routes import admin_bp
 
 from utils.demo_data import DEMO_USERS, DemoUser
-
+from utils.env import SECRET_KEY
 
 from db_codes.database_make import create_db_and_engine
 
 app = Flask(__name__)
 
-app.config["SECRET_KEY"] = "super-secret-key"
+app.config["SECRET_KEY"] = SECRET_KEY
 
 app.register_blueprint(blueprint=auth_bp)
 app.register_blueprint(blueprint=general_bp)
@@ -64,5 +64,5 @@ if __name__ == "__main__":
     app.run(
         host="0.0.0.0",
         port=5000,
-        debug=True,
+        debug=False,
     )

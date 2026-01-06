@@ -5,8 +5,8 @@ I make this for checking how this will work
 
 import logging
 
-from utils.config_files import log_file_name, enable_console_logging
-
+from utils.config_files import enable_console_logging
+from utils.env import LOG_FILE_NAME
 
 logger = logging.getLogger(__name__)
 
@@ -20,7 +20,7 @@ formatter = logging.Formatter(
 
 
 file_handler = logging.FileHandler(
-    filename=log_file_name,
+    filename=LOG_FILE_NAME,
     mode="a",
     encoding="utf-8",
 )

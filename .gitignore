@@ -9,8 +9,12 @@ wheels/
 # Virtual environments
 .venv
 
+# The private / secret values
+.env
+
 
 # The databse file for sqlite3
+database.db
 z_database.db
 
 # This below is the default name i keep in my 
