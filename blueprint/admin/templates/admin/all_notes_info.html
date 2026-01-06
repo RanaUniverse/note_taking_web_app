@@ -12,12 +12,14 @@ Know all notes list and details
 
 <h1>All Notes & Their Details are showing below</h1>
 <hr>
-
+<h2>Total Notes: {{ all_notes | length }}</h2>
+<hr>
 {% for note in all_notes %}
-
-Note ID: {{ note.note_id }}
+<b>Note {{ loop.index }} of {{ loop.length }} :</b>
 <br>
 Note Title: <b>{{ note.note_title }}</b>
+<br>
+Note ID: {{ note.note_id }}
 <br>
 Note Content: <b>{{ note.note_content }}</b>
 <br>

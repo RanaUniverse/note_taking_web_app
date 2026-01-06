@@ -6,16 +6,16 @@ i am making this so that i can have some admin related thigns here for easily ac
 #}
 
 {% macro admin_navbar() %}
-<a href="{{ url_for('general_bp.index_page') }}">🏠 Home</a>
-<br>
-<a href="{{ url_for('admin_bp.index_page') }}">🛠️ Admin Dashboard</a>
-<br>
-<a href="{{ url_for('admin_bp.all_users_info') }}">👥 All Users</a>
-<br>
-<a href="{{ url_for('admin_bp.all_notes_info') }}">📕 All Notes</a>
-<br>
-<a href="{{ url_for('admin_bp.note_count') }}">🗒️ Notes Overview</a>
-<br>
-<a href="{{ url_for('admin_bp.username') }}">🔍 User Details</a>
-<br>
+<h3>
+    <a href="{{ url_for('general_bp.index_page') }}">🏠 Home (Back To Main Page)</a>
+    <br>
+    <a href="{{ url_for('admin_bp.index_page') }}">🛠️ Admin Dashboard</a>
+    <br>
+    <a href="{{ url_for('admin_bp.all_notes_info') }}">📕 All Notes Details</a>
+    <br>
+    <a href="{{ url_for('admin_bp.all_users_info') }}">👥 All Users Details</a>
+    <br>
+    <a href="{{ url_for('admin_bp.username') }}">🔍 Find User Details</a>
+    <br>
+</h3>
 {% endmacro %}

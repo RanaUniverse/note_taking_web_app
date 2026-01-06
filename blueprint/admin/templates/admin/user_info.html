@@ -20,7 +20,9 @@ See Total NOtes Number
     <br>
     <strong> User ID: </strong> {{ user.user_id }}
     <br>
-    <strong> Name: </strong> {{ user.first_name + " " + user.last_name}}
+    {# <strong> Name: </strong> {{ user.first_name + " " + user.last_name}} #}
+    <strong> Name: </strong> {{ user.first_name or "" }} {{ user.last_name or "" }}
+
     <br>
     <strong> Email ID: </strong> {{ user.email_id }}
     <br>

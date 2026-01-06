@@ -17,3 +17,7 @@ This website help to get some idea about the jinja things.
 4. I will make blueprint for which i need to make different folders and inside this i need to make routes.py and own things maybe.
 
 5. I found when working with sqlite3 > sqlmodel when having the username column as unique = true, the null values so i will do for now unique = false and on adding new user first it will check of username already present or not?
+
+6. In the place of when in admin blueprint i enter the username in the field and then it send the html and refresh it cause resubmit, so i will need to make, `POST → redirect → GET`, that's why i will need to make a url like get to fetch the username field. and after the post i will redirect.
+
+7. i need to work on the admin blueprints or maybe others places so that in flash() i can shows html things?

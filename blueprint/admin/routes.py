@@ -7,6 +7,7 @@ Which are accessable by the admins here in my app.
 from flask import (
     Blueprint,
     render_template,
+    flash
 )
 
 from db_codes.database_make import engine
@@ -15,6 +16,7 @@ from db_codes.db_functions import (
     get_user_obj_from_username,
     get_all_note_list,
     get_all_notes_from_user_id,
+    
 )
 
 from wft_forms_fillup import UserFromUsernameForm
@@ -49,12 +51,6 @@ def all_notes_info():
     )
 
 
-@admin_bp.route("/note_count")
-def note_count():
-    return render_template(
-        "/admin/notes_count.html",
-    )
-
 
 @admin_bp.route("/user_from_username", methods=["GET", "POST"])
 def username():
@@ -71,6 +67,7 @@ def username():
             username=given_username,
         )
         if not user_row:
+            flash(f"User Has Not Found with, <u>{given_username}</u>", "error")
             return render_template(
                 "/admin/user_info.html",
                 user=user_row,
@@ -82,6 +79,7 @@ def username():
             engine=engine,
             user_id=user_id,
         )
+        flash(f"User Details For {given_username}", "success")
         return render_template(
             "/admin/user_info.html",
             user=user_row,

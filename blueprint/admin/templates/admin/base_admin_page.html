@@ -7,6 +7,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        .flashes {
+            list-style: none;
+            padding: 0;
+        }
+
+        .flashes li {
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+
+        .flashes li.success {
+            background-color: #d4edda;
+            color: #155724;
+        }
+
+        .flashes li.error {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+
+        .flashes li.warning {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+
+        .flashes li.info {
+            background-color: #d1ecf1;
+            color: #0c5460;
+        }
+    </style>
+
+
+
     <title>
         {% block title %}
         Admin Title Defaults
@@ -16,6 +53,24 @@
 
 <body>
     {{ nav.admin_navbar() }}
+    <hr>
+
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    {% if messages %}
+    <ul class="flashes">
+        {% for category, message in messages %}
+        <li class="{{ category }}">
+            {{ message }}
+        </li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% endwith %}
+
+
+
     <header>
         <h1>
             This is Admin Page
@@ -25,7 +80,6 @@
     <main>
         <hr>
         {% block content %}
-
         {% endblock %}
         <hr>
     </main>
